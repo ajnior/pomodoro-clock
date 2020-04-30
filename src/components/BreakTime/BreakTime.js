@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { incrementBreak, decrementBreak } from '../../redux/actions';
 
 function BreakTime(props) {
+  const { breakLength, increment, decrement } = props;
+
   return (
     <div>
-      <div>{props.breakLength}</div>
-      <button onClick={props.increment}>increment</button>
-      <button onClick={props.decrement}>decrement</button>
+      <h2>Break Length</h2>
+      <div>{breakLength}</div>
+      <button onClick={increment}>increment</button>
+      <button onClick={decrement}>decrement</button>
     </div>
   );
 }
