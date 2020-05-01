@@ -1,17 +1,26 @@
 import React from 'react';
-import Clock from '../../utils/Clock';
+import useCountdownTimer from '../../hooks/useCountdownTimer';
 
 function SessionDisplay() {
-  const clock = new Clock(0, 1, 10);
-
-  console.log(clock.displaytime());
+  const {
+    minutes,
+    seconds,
+    isCountingdown,
+    startCountdown,
+  } = useCountdownTimer({
+    mm: 1,
+    ss: 10,
+  });
 
   return (
     <div>
       <h2>SessionDisplay</h2>
       <div>display</div>
-      <button onClick={() => clock.start()}>Start</button>
-      <button onClick={() => clock.start()}>Start</button>
+      <div>is countingdown: {isCountingdown}</div>
+      <div>
+        {minutes}:{seconds}
+      </div>
+      <div onClick={startCountdown}>start countdown</div>
     </div>
   );
 }
