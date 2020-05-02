@@ -8,6 +8,9 @@ class Clock extends Component {
       seconds: this.props.seconds,
       isRunning: false,
     };
+
+    this.interval = undefined;
+
     this.countdownIntervalFunction = function () {
       if (this.state.minutes > 0) {
         if (this.state.seconds < 1) {
@@ -23,7 +26,6 @@ class Clock extends Component {
         clearInterval(this.countdownInterval);
       }
     };
-    this.interval = undefined;
   }
 
   startCountdown = () => {
