@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { decreaseOneMinute, reset } from '../../redux/actions';
 
 class Clock extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      minutes: this.props.minutes,
-      seconds: this.props.seconds,
+      minutes: this.props.clock || 0,
+      seconds: this.props.seconds || 0,
       isRunning: false,
     };
 
     this.interval = undefined;
 
+    this.decreaseOneMinute = this.props.decreaseOneMinute;
+
     this.countdownIntervalFunction = function () {
-      if (this.state.minutes > 0) {
+      if (this.props.minutesLeft > 0) {
         if (this.state.seconds < 1) {
-          this.descreaseByOne('minutes');
+          this.decreaseOneMinute();
           this.resetSeconds();
         } else {
           this.descreaseByOne('seconds');
@@ -54,6 +58,32 @@ class Clock extends Component {
     );
   };
 
+  clearClockInterval() {
+    this.setState(
+      {
+        isRunning: !this.state.isRunning,
+      },
+      () => {
+        clearInterval(this.interval);
+        this.interval = undefined;
+      }
+    );
+  }
+
+  startStop = () => {
+    if (this.state.isRunning) {
+      this.clearClockInterval();
+    } else {
+      this.setState({
+        isRunning: !this.state.isRunning,
+      });
+      this.interval = setInterval(
+        this.countdownIntervalFunction.bind(this),
+        1000
+      );
+    }
+  };
+
   descreaseByOne = (targetProp) => {
     this.setState((prevState) => ({
       [targetProp]: prevState[targetProp] - 1,
@@ -65,18 +95,46 @@ class Clock extends Component {
     this.setState({ seconds });
   };
 
+  reset = () => {
+    this.clearClockInterval();
+    this.props.resetValues();
+  };
+
+  withPadStart(num) {
+    return num.toString().padStart(2, '0');
+  }
+
   render = () => {
-    const { minutes, seconds } = this.state;
+    const { minutesLeft } = this.props;
+
+    const timeLeft = `${this.withPadStart(minutesLeft)}:${this.withPadStart(
+      this.state.seconds
+    )}`;
+
     return (
       <>
-        <p>
-          {minutes}:{seconds}
-        </p>
-        <button onClick={this.startCountdown}>startCountdown</button>
-        <button onClick={this.stopCountdown}>stopCountdown</button>
+        <div id="time-left">{timeLeft}</div>
+        <button id="start_stop" onClick={this.startStop}>
+          start/stop
+        </button>
+        <button id="reset" onClick={this.reset}>
+          reset
+        </button>
       </>
     );
   };
 }
 
-export default Clock;
+function mapStateToProps(state) {
+  return {
+    sessionLength: state.sessionLength,
+    minutesLeft: state.clock,
+  };
+}
+
+const mapDispatchToProps = {
+  decreaseOneMinute: decreaseOneMinute,
+  resetValues: reset,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Clock);

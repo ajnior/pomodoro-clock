@@ -6,11 +6,15 @@ function BreakTime(props) {
   const { breakLength, increment, decrement } = props;
 
   return (
-    <div>
-      <h2>Break Length</h2>
-      <div>{breakLength}</div>
-      <button onClick={increment}>increment</button>
-      <button onClick={decrement}>decrement</button>
+    <div className="break-time">
+      <h2 id="break-label">Break Length</h2>
+      <div id="break-length">{breakLength}</div>
+      <button id="break-increment" onClick={increment}>
+        increment
+      </button>
+      <button id="break-decrement" onClick={decrement}>
+        decrement
+      </button>
     </div>
   );
 }

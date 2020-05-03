@@ -3,6 +3,9 @@ import {
   DECREMENT_BREAK,
   INCREMENT_SESSION,
   DECREMENT_SESSION,
+  DECREASE_BY_ONE,
+  INCREASE_BY_ONE,
+  RESET,
 } from '../constants';
 
 export function incrementBreak() {
@@ -26,5 +29,23 @@ export function incrementSession() {
 export function decrementSession() {
   return {
     type: DECREMENT_SESSION,
+  };
+}
+
+export function decreaseOneMinute() {
+  return {
+    type: DECREASE_BY_ONE,
+  };
+}
+
+export function increaseOneMinute() {
+  return {
+    type: INCREASE_BY_ONE,
+  };
+}
+
+export function reset() {
+  return {
+    type: RESET,
   };
 }
