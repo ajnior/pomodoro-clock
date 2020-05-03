@@ -1,19 +1,21 @@
 import React from 'react';
-import Clock from '../Clock';
+import Timer from '../Timer';
 import { connect } from 'react-redux';
 
-function SessionDisplay({ sessionLength }) {
+function SessionDisplay({ isBreak }) {
+  const label = isBreak ? 'Break' : 'Session';
+
   return (
     <div>
-      <h2 id="timer-label">Session</h2>
-      <Clock minutes={sessionLength} />
+      <h2 id="timer-label">{label}</h2>
+      <Timer />
     </div>
   );
 }
 
 function mapStateToProps(state) {
   return {
-    sessionLength: state.sessionLength,
+    isBreak: state.timer.isBreak,
   };
 }
 

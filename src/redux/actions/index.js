@@ -3,9 +3,13 @@ import {
   DECREMENT_BREAK,
   INCREMENT_SESSION,
   DECREMENT_SESSION,
-  DECREASE_BY_ONE,
-  INCREASE_BY_ONE,
+  INCREASE_ONE_MINUTE,
+  DECREASE_ONE_SECOND,
+  DECREASE_ONE_MINUTE,
+  RESET_SECONDS,
   RESET,
+  SET_IS_RUNNING,
+  SET_BREAK_TIME,
 } from '../constants';
 
 export function incrementBreak() {
@@ -34,18 +38,44 @@ export function decrementSession() {
 
 export function decreaseOneMinute() {
   return {
-    type: DECREASE_BY_ONE,
+    type: DECREASE_ONE_MINUTE,
+  };
+}
+
+export function decreaseOneSecond() {
+  return {
+    type: DECREASE_ONE_SECOND,
   };
 }
 
 export function increaseOneMinute() {
   return {
-    type: INCREASE_BY_ONE,
+    type: INCREASE_ONE_MINUTE,
+  };
+}
+
+export function resetSeconds() {
+  return {
+    type: RESET_SECONDS,
   };
 }
 
 export function reset() {
   return {
     type: RESET,
+  };
+}
+
+export function setIsRunning(bool) {
+  return {
+    type: SET_IS_RUNNING,
+    payload: bool,
+  };
+}
+
+export function setBreakTime(time) {
+  return {
+    type: SET_BREAK_TIME,
+    payload: time,
   };
 }
