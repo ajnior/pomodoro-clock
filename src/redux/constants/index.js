@@ -14,3 +14,4 @@ export const RESET_SECONDS = 'RESET_SECONDS';
 export const RESET = 'RESET';
 export const SET_IS_RUNNING = 'SET_IS_RUNNING';
 export const SET_BREAK_TIME = 'SET_BREAK_TIME';
+export const SET_MINUTES = 'SET_MINUTES';

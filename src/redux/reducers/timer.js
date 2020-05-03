@@ -6,6 +6,7 @@ import {
   RESET,
   SET_IS_RUNNING,
   SET_BREAK_TIME,
+  SET_MINUTES,
 } from '../constants/index';
 
 const minimumStartValue = 1;
@@ -36,8 +37,11 @@ function timer(state = initialState, action) {
     case SET_BREAK_TIME:
       return Object.assign({}, state, {
         minutes: action.payload,
-        isBreak: true,
+        isBreak: action.payload < 1 ? false : true,
       });
+    case SET_MINUTES: {
+      return Object.assign({}, state, { minutes: action.payload });
+    }
     default:
       return state;
   }

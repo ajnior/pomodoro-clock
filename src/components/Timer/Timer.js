@@ -7,6 +7,7 @@ import {
   reset,
   setIsRunning,
   setBreakTime,
+  setMinutes,
 } from '../../redux/actions';
 
 class Timer extends Component {
@@ -16,7 +17,22 @@ class Timer extends Component {
     this.interval = undefined;
 
     this.countdownIntervalFunction = function () {
-      const { decreaseOneMinute, decreaseOneSecond, resetSeconds } = this.props;
+      const {
+        setBreakTime,
+        decreaseOneMinute,
+        decreaseOneSecond,
+        resetSeconds,
+      } = this.props;
+
+      if (this.props.minutesLeft === 0 && this.props.secondsLeft === 0) {
+        this.stopCountdown();
+        if (!this.props.isBreak) {
+          return this.startBreak();
+        } else {
+          setBreakTime(0); // sets isBreak to false if arg is lt 1
+          return this.startCountdown();
+        }
+      }
 
       if (this.props.minutesLeft > 0) {
         if (this.props.secondsLeft < 1) {
@@ -25,22 +41,15 @@ class Timer extends Component {
         } else {
           decreaseOneSecond();
         }
-      } else if (this.props.secondsLeft > 0) {
+      } else {
         decreaseOneSecond();
-      }
-      if (this.props.minutesLeft === 0 && this.props.secondsLeft === 0) {
-        this.stopCountdown();
-        if (!this.props.isBreak) {
-          return this.startBreak();
-        } else {
-          return this.startCountdown();
-        }
       }
     };
   }
 
   startCountdown = () => {
-    const { setIsRunning } = this.props;
+    const { sessionLength, setMinutes, setIsRunning } = this.props;
+    setMinutes(sessionLength);
     setIsRunning(true);
     this.interval = setInterval(
       this.countdownIntervalFunction.bind(this),
@@ -120,6 +129,7 @@ const mapDispatchToProps = {
   resetValues: reset,
   setIsRunning: setIsRunning,
   setBreakTime: setBreakTime,
+  setMinutes: setMinutes,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);

@@ -10,6 +10,7 @@ import {
   RESET,
   SET_IS_RUNNING,
   SET_BREAK_TIME,
+  SET_MINUTES,
 } from '../constants';
 
 export function incrementBreak() {
@@ -77,5 +78,12 @@ export function setBreakTime(time) {
   return {
     type: SET_BREAK_TIME,
     payload: time,
+  };
+}
+
+export function setMinutes(minutes) {
+  return {
+    type: SET_MINUTES,
+    payload: minutes,
   };
 }
