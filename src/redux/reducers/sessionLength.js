@@ -7,6 +7,11 @@ function sessionLength(state = initialState, action) {
     case INCREMENT_SESSION:
       return state + 1;
     case DECREMENT_SESSION:
+      const nextState = state - 1;
+      const isLessThanOne = nextState < 1;
+      if (isLessThanOne) {
+        return state;
+      }
       return state - 1;
     case RESET:
       return initialState;

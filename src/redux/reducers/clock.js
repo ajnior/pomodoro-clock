@@ -7,6 +7,11 @@ function clock(state = initialState, action) {
     case INCREASE_BY_ONE:
       return state + 1;
     case DECREASE_BY_ONE:
+      const nextState = state - 1;
+      const isNegative = nextState < 0;
+      if (isNegative) {
+        return state;
+      }
       return state - 1;
     case RESET:
       return initialState;

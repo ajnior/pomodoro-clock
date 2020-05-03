@@ -97,6 +97,7 @@ class Clock extends Component {
 
   reset = () => {
     this.clearClockInterval();
+    this.setState({ seconds: 0 });
     this.props.resetValues();
   };
 
