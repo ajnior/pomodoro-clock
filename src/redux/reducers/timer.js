@@ -24,7 +24,7 @@ function timer(state = initialState, action) {
       return Object.assign({}, state, { minutes: state.minutes + 1 });
     case DECREASE_ONE_MINUTE:
       if (!state.isRunning && state.minutes <= minimumStartValue) return state;
-      if (state.isRunning && state.minutes <= 0) return state;
+      if (state.isRunning && state.minutes < 1) return state;
       return Object.assign({}, state, { minutes: state.minutes - 1 });
     case DECREASE_ONE_SECOND:
       return Object.assign({}, state, { seconds: state.seconds - 1 });
@@ -36,8 +36,7 @@ function timer(state = initialState, action) {
       return Object.assign({}, state, { isRunning: action.payload });
     case SET_BREAK_TIME:
       return Object.assign({}, state, {
-        minutes: action.payload,
-        isBreak: action.payload < 1 ? false : true,
+        isBreak: action.payload,
       });
     case SET_MINUTES: {
       return Object.assign({}, state, { minutes: action.payload });

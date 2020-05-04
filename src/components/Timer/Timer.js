@@ -15,22 +15,22 @@ class Timer extends Component {
     super(props);
 
     this.interval = undefined;
+    this.currSession = true;
+    this.setIsRunning = this.props.setIsRunning;
+    this.setMinutes = this.props.setMinutes;
+    this.setBreakTime = this.props.setBreakTime;
 
     this.countdownIntervalFunction = function () {
-      const {
-        setBreakTime,
-        decreaseOneMinute,
-        decreaseOneSecond,
-        resetSeconds,
-      } = this.props;
+      const { decreaseOneMinute, decreaseOneSecond, resetSeconds } = this.props;
 
-      if (this.props.minutesLeft === 0 && this.props.secondsLeft === 0) {
+      console.log('mm:ss', this.props.minutesLeft, this.props.secondsLeft);
+
+      if (this.props.minutesLeft <= 0 && this.props.secondsLeft <= 0) {
         this.stopCountdown();
         if (!this.props.isBreak) {
-          return this.startBreak();
+          this.startBreak();
         } else {
-          setBreakTime(0); // sets isBreak to false if arg is lt 1
-          return this.startCountdown();
+          this.startCountdown(this.props.sessionLength, false);
         }
       }
 
@@ -47,10 +47,12 @@ class Timer extends Component {
     };
   }
 
-  startCountdown = () => {
-    const { sessionLength, setMinutes, setIsRunning } = this.props;
-    setMinutes(sessionLength);
-    setIsRunning(true);
+  startCountdown = (timeLength, isBreak = false) => {
+    this.setBreakTime(isBreak);
+    if (!this.currSession) {
+      this.setMinutes(timeLength);
+    }
+    this.setIsRunning(true);
     this.interval = setInterval(
       this.countdownIntervalFunction.bind(this),
       1000
@@ -58,31 +60,30 @@ class Timer extends Component {
   };
 
   stopCountdown = () => {
-    const { setIsRunning } = this.props;
-    setIsRunning(false);
+    this.setIsRunning(false);
     clearInterval(this.interval);
     this.interval = undefined;
   };
 
   startStop = () => {
-    const { isRunning } = this.props;
-
+    const { sessionLength, isRunning } = this.props;
     if (isRunning) {
       this.stopCountdown();
     } else {
-      this.startCountdown();
+      this.startCountdown(sessionLength);
     }
   };
 
   startBreak = () => {
-    const { breakLength, setBreakTime } = this.props;
-    setBreakTime(breakLength);
-    this.startCountdown();
+    const { breakLength } = this.props;
+    setMinutes(breakLength);
+    this.startCountdown(breakLength, true);
   };
 
   reset = () => {
     const { resetValues } = this.props;
     this.stopCountdown();
+    this.currSession = false;
     resetValues();
   };
 
@@ -91,6 +92,7 @@ class Timer extends Component {
   }
 
   render = () => {
+    console.log('props', this.props);
     const { minutesLeft, secondsLeft } = this.props;
 
     const timeLeft = `${this.withPadStart(minutesLeft)}:${this.withPadStart(

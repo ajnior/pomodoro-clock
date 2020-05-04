@@ -10,6 +10,7 @@ import {
 function SessionTime(props) {
   const {
     sessionLength,
+    isRunning,
     increment,
     decrement,
     increaseOneMinute,
@@ -23,6 +24,7 @@ function SessionTime(props) {
       <button
         id="session-increment"
         onClick={() => {
+          if (isRunning) return null;
           increment();
           increaseOneMinute();
         }}
@@ -32,6 +34,7 @@ function SessionTime(props) {
       <button
         id="session-decrement"
         onClick={() => {
+          if (isRunning) return null;
           decrement();
           decreaseOneMinute();
         }}
@@ -45,7 +48,7 @@ function SessionTime(props) {
 function mapStateToProps(state) {
   return {
     sessionLength: state.sessionLength,
-    clockLength: state.clock,
+    isRunning: state.timer.isRunning,
   };
 }
 
