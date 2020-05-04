@@ -7,6 +7,9 @@ import {
   decreaseOneMinute,
 } from '../../redux/actions';
 
+import { ReactComponent as PlusIcon } from '../../assets/images/icons/plus-icon.svg';
+import { ReactComponent as MinusIcon } from '../../assets/images/icons/minus-icon.svg';
+
 function SessionTime(props) {
   const {
     sessionLength,
@@ -18,20 +21,9 @@ function SessionTime(props) {
   } = props;
 
   return (
-    <div className="session-time">
-      <h2 id="session-label">Session Length</h2>
-      <div id="session-length">{sessionLength}</div>
-      <button
-        id="session-increment"
-        onClick={() => {
-          if (isRunning) return null;
-          increment();
-          increaseOneMinute();
-        }}
-      >
-        increment
-      </button>
-      <button
+    <div className="pomodoro-clock__session">
+      <h2 id="session-label">Session</h2>
+      {/* <button
         id="session-decrement"
         onClick={() => {
           if (isRunning) return null;
@@ -40,7 +32,38 @@ function SessionTime(props) {
         }}
       >
         decrement
-      </button>
+      </button> */}
+      <MinusIcon
+        id="session-decrement"
+        className="pomodoro-clock__icon"
+        onClick={() => {
+          if (isRunning) return null;
+          decrement();
+          decreaseOneMinute();
+        }}
+      />
+      <div id="session-length" className="pomodoro-clock__length-display">
+        {sessionLength}
+      </div>
+      {/* <button
+        id="session-increment"
+        onClick={() => {
+          if (isRunning) return null;
+          increment();
+          increaseOneMinute();
+        }}
+      >
+        increment
+      </button> */}
+      <PlusIcon
+        id="session-increment"
+        className="pomodoro-clock__icon"
+        onClick={() => {
+          if (isRunning) return null;
+          increment();
+          increaseOneMinute();
+        }}
+      />
     </div>
   );
 }

@@ -16,6 +16,7 @@ class Timer extends Component {
 
     this.interval = undefined;
     this.currSession = true;
+    this.audioRef = this.props.audioRef;
     this.setIsRunning = this.props.setIsRunning;
     this.setMinutes = this.props.setMinutes;
     this.setBreakTime = this.props.setBreakTime;
@@ -25,6 +26,7 @@ class Timer extends Component {
 
       if (this.props.minutesLeft <= 0 && this.props.secondsLeft <= 0) {
         this.stopCountdown();
+        this.playBeep();
         if (!this.props.isBreak) {
           return this.startBreak(this.props.breakLength);
         } else {
@@ -86,6 +88,16 @@ class Timer extends Component {
     this.stopCountdown();
     this.currSession = false;
     resetValues();
+    this.reloadBeep();
+  };
+
+  playBeep = () => {
+    this.audioRef.current.play();
+  };
+
+  reloadBeep = () => {
+    this.audioRef.current.pause();
+    this.audioRef.current.currentTime = 0;
   };
 
   withPadStart(num) {
@@ -114,7 +126,6 @@ class Timer extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.timer.minutes);
   return {
     breakLength: state.breakLength,
     sessionLength: state.sessionLength,

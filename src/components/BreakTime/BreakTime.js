@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { incrementBreak, decrementBreak } from '../../redux/actions';
 
+import { ReactComponent as PlusIcon } from '../../assets/images/icons/plus-icon.svg';
+import { ReactComponent as MinusIcon } from '../../assets/images/icons/minus-icon.svg';
+
 function BreakTime(props) {
   const { breakLength, increment, decrement, isRunning } = props;
 
@@ -11,15 +14,27 @@ function BreakTime(props) {
   }
 
   return (
-    <div className="break-time">
-      <h2 id="break-label">Break Length</h2>
-      <div id="break-length">{breakLength}</div>
-      <button id="break-increment" onClick={() => handleBreakAction(increment)}>
-        increment
-      </button>
-      <button id="break-decrement" onClick={() => handleBreakAction(decrement)}>
+    <div className="pomodoro-clock__break">
+      <h2 id="break-label">Break</h2>
+      {/* <button id="break-decrement" onClick={() => handleBreakAction(decrement)}>
         decrement
-      </button>
+      </button> */}
+      <MinusIcon
+        id="break-decrement"
+        className="pomodoro-clock__icon"
+        onClick={() => handleBreakAction(decrement)}
+      />
+      <div id="break-length" className="pomodoro-clock__length-display">
+        {breakLength}
+      </div>
+      {/* <button id="break-increment" onClick={() => handleBreakAction(increment)}>
+        increment
+      </button> */}
+      <PlusIcon
+        id="break-increment"
+        className="pomodoro-clock__icon"
+        onClick={() => handleBreakAction(increment)}
+      />
     </div>
   );
 }

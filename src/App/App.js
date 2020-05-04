@@ -1,22 +1,31 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import BreakTime from '../components/BreakTime';
 import SessionTime from '../components/SessionTime';
 import SessionDisplay from '../components/SessionDisplay';
-import './styles.css';
+import { AppWrapper, AppStyles } from './styles';
 
 function App() {
+  const audioRef = useRef(null);
+
   return (
-    <div className="pomodoro-clock">
-      <div className="App">Pomodoro</div>
-      <section>
-        <BreakTime />
-        <SessionTime />
-      </section>
-      <section>
-        <SessionDisplay />
-      </section>
-      <audio id="beep" preload="auto" src="https://goo.gl/65cBl1" />
-    </div>
+    <AppWrapper>
+      <AppStyles className="pomodoro-clock">
+        <h1 className="pomodoro-clock__header">Pomodoro Clock</h1>
+        <div className="pomodoro-clock__length">
+          <BreakTime />
+          <SessionTime className="pomodoro-clock__session" />
+        </div>
+        <div>
+          <SessionDisplay audioRef={audioRef} />
+        </div>
+        <audio
+          ref={audioRef}
+          id="beep"
+          preload="auto"
+          src="https://goo.gl/65cBl1"
+        />
+      </AppStyles>
+    </AppWrapper>
   );
 }
 

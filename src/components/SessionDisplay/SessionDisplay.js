@@ -2,13 +2,13 @@ import React from 'react';
 import Timer from '../Timer';
 import { connect } from 'react-redux';
 
-function SessionDisplay({ isBreak }) {
+function SessionDisplay({ isBreak, audioRef }) {
   const label = isBreak ? 'Break' : 'Session';
 
   return (
     <div>
       <h2 id="timer-label">{label}</h2>
-      <Timer />
+      <Timer audioRef={audioRef} />
     </div>
   );
 }
