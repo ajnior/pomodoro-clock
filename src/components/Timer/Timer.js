@@ -23,14 +23,12 @@ class Timer extends Component {
     this.countdownIntervalFunction = function () {
       const { decreaseOneMinute, decreaseOneSecond, resetSeconds } = this.props;
 
-      console.log('mm:ss', this.props.minutesLeft, this.props.secondsLeft);
-
       if (this.props.minutesLeft <= 0 && this.props.secondsLeft <= 0) {
         this.stopCountdown();
         if (!this.props.isBreak) {
-          this.startBreak();
+          return this.startBreak(this.props.breakLength);
         } else {
-          this.startCountdown(this.props.sessionLength, false);
+          return this.startCountdown(this.props.sessionLength, false);
         }
       }
 
@@ -38,11 +36,14 @@ class Timer extends Component {
         if (this.props.secondsLeft < 1) {
           decreaseOneMinute();
           resetSeconds();
+          return;
         } else {
           decreaseOneSecond();
+          return;
         }
       } else {
         decreaseOneSecond();
+        return;
       }
     };
   }
@@ -92,7 +93,6 @@ class Timer extends Component {
   }
 
   render = () => {
-    console.log('props', this.props);
     const { minutesLeft, secondsLeft } = this.props;
 
     const timeLeft = `${this.withPadStart(minutesLeft)}:${this.withPadStart(
@@ -114,6 +114,7 @@ class Timer extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state.timer.minutes);
   return {
     breakLength: state.breakLength,
     sessionLength: state.sessionLength,

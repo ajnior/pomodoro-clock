@@ -39,6 +39,7 @@ function timer(state = initialState, action) {
         isBreak: action.payload,
       });
     case SET_MINUTES: {
+      console.log('setMinutes', action.payload);
       return Object.assign({}, state, { minutes: action.payload });
     }
     default:
