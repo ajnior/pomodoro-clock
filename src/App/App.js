@@ -10,12 +10,14 @@ function App() {
   return (
     <AppWrapper>
       <AppStyles className="pomodoro-clock">
-        <h1 className="pomodoro-clock__header">Pomodoro Clock</h1>
+        <h1 className="pomodoro-clock__header pomodoro-clock__gradient-text">
+          Pomodoro Clock
+        </h1>
         <div className="pomodoro-clock__length">
           <BreakTime />
           <SessionTime className="pomodoro-clock__session" />
         </div>
-        <div>
+        <div className="pomodoro-clock__session-display">
           <SessionDisplay audioRef={audioRef} />
         </div>
         <audio

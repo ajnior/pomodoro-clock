@@ -23,7 +23,7 @@ function SessionTime(props) {
   return (
     <div className="pomodoro-clock__session">
       <h2 id="session-label">Session</h2>
-      {/* <button
+      <button
         id="session-decrement"
         onClick={() => {
           if (isRunning) return null;
@@ -32,20 +32,12 @@ function SessionTime(props) {
         }}
       >
         decrement
-      </button> */}
-      <MinusIcon
-        id="session-decrement"
-        className="pomodoro-clock__icon"
-        onClick={() => {
-          if (isRunning) return null;
-          decrement();
-          decreaseOneMinute();
-        }}
-      />
+        <MinusIcon className="pomodoro-clock__icon" />
+      </button>
       <div id="session-length" className="pomodoro-clock__length-display">
         {sessionLength}
       </div>
-      {/* <button
+      <button
         id="session-increment"
         onClick={() => {
           if (isRunning) return null;
@@ -54,16 +46,8 @@ function SessionTime(props) {
         }}
       >
         increment
-      </button> */}
-      <PlusIcon
-        id="session-increment"
-        className="pomodoro-clock__icon"
-        onClick={() => {
-          if (isRunning) return null;
-          increment();
-          increaseOneMinute();
-        }}
-      />
+        <PlusIcon className="pomodoro-clock__icon" />
+      </button>
     </div>
   );
 }

@@ -16,25 +16,17 @@ function BreakTime(props) {
   return (
     <div className="pomodoro-clock__break">
       <h2 id="break-label">Break</h2>
-      {/* <button id="break-decrement" onClick={() => handleBreakAction(decrement)}>
+      <button id="break-decrement" onClick={() => handleBreakAction(decrement)}>
         decrement
-      </button> */}
-      <MinusIcon
-        id="break-decrement"
-        className="pomodoro-clock__icon"
-        onClick={() => handleBreakAction(decrement)}
-      />
+        <MinusIcon className="pomodoro-clock__icon" />
+      </button>
       <div id="break-length" className="pomodoro-clock__length-display">
         {breakLength}
       </div>
-      {/* <button id="break-increment" onClick={() => handleBreakAction(increment)}>
+      <button id="break-increment" onClick={() => handleBreakAction(increment)}>
         increment
-      </button> */}
-      <PlusIcon
-        id="break-increment"
-        className="pomodoro-clock__icon"
-        onClick={() => handleBreakAction(increment)}
-      />
+        <PlusIcon className="pomodoro-clock__icon" />
+      </button>
     </div>
   );
 }

@@ -10,6 +10,9 @@ import {
   setMinutes,
 } from '../../redux/actions';
 
+import { ReactComponent as PlayPauseIcon } from '../../assets/images/icons/playpause-icon.svg';
+import { ReactComponent as ResetIcon } from '../../assets/images/icons/reset-icon-2.svg';
+
 class Timer extends Component {
   constructor(props) {
     super(props);
@@ -113,12 +116,14 @@ class Timer extends Component {
 
     return (
       <>
-        <div id="time-left">{timeLeft}</div>
+        <h3 id="time-left">{timeLeft}</h3>
         <button id="start_stop" onClick={this.startStop}>
           start/stop
+          <PlayPauseIcon className="pomodoro-clock__icon pomodoro-clock__session-icon" />
         </button>
         <button id="reset" onClick={this.reset}>
           reset
+          <ResetIcon className="pomodoro-clock__icon pomodoro-clock__session-icon" />
         </button>
       </>
     );
