@@ -55,8 +55,9 @@ export const AppStyles = styled.div`
       #session-label {
         width: 100%;
         margin-bottom: 0.3rem;
+        font-weight: 300;
       }
-      font-size: 1rem;
+      font-size: 0.875rem;
       text-transform: uppercase;
       color: ${colors.app.headerColor};
       display: flex;
@@ -67,7 +68,7 @@ export const AppStyles = styled.div`
     }
 
     &__length-display {
-      font-size: 2.4rem;
+      font-size: 2rem;
     }
 
     &__timer-display {
@@ -75,7 +76,7 @@ export const AppStyles = styled.div`
     }
 
     &__icon {
-      max-width: 32px;
+      max-width: 26px;
       height: auto;
     }
   }
