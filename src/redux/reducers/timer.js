@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import {
   INCREASE_ONE_MINUTE,
   DECREASE_ONE_MINUTE,
@@ -19,13 +20,20 @@ const initialState = {
 };
 
 function timer(state = initialState, action) {
+  console.log('state', state);
   switch (action.type) {
     case INCREASE_ONE_MINUTE:
-      return Object.assign({}, state, { minutes: state.minutes + 1 });
+      return Object.assign({}, state, {
+        minutes: state.seconds == 0 ? state.minutes + 1 : state.minutes + 2,
+        seconds: 0,
+      });
     case DECREASE_ONE_MINUTE:
       if (!state.isRunning && state.minutes <= minimumStartValue) return state;
       if (state.isRunning && state.minutes < 1) return state;
-      return Object.assign({}, state, { minutes: state.minutes - 1 });
+      return Object.assign({}, state, {
+        minutes: state.seconds == 0 ? state.minutes - 1 : state.minutes - 2,
+        seconds: 0,
+      });
     case DECREASE_ONE_SECOND:
       return Object.assign({}, state, { seconds: state.seconds - 1 });
     case RESET_SECONDS:
