@@ -6,7 +6,7 @@ export const AppWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 export const AppStyles = styled.div`
@@ -15,6 +15,7 @@ export const AppStyles = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
+  max-width: 90%;
   background: ${colors.white};
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
@@ -26,6 +27,7 @@ export const AppStyles = styled.div`
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.1);
 
   .pomodoro-clock {
+    min-width: 300px;
     &__gradient-text {
       text-transform: uppercase;
 
@@ -44,7 +46,9 @@ export const AppStyles = styled.div`
       text-align: center;
       font-weight: 700;
       font-size: 2.8rem;
-      width: 100%;
+      @media (max-width: 365px) {
+        font-size: 1.8rem;
+      }
     }
 
     &__length {
@@ -63,7 +67,11 @@ export const AppStyles = styled.div`
     &__break,
     &__session {
       @media(max-width: 768px) {
+        width: 50%;
         margin-bottom: 1rem;
+      }
+      @media(max-width: 365px) {
+        width: 100%;
       }
       #break-label,
       #session-label {
@@ -120,6 +128,9 @@ export const AppStyles = styled.div`
         font-weight: 700;
         color: ${colors.purple};
         margin-bottom: 0.5rem;
+        @media(max-width: 365px) {
+          font-size: 2.8rem;
+        }
       }
       #start_stop,
       #reset {
@@ -127,6 +138,9 @@ export const AppStyles = styled.div`
         background: none;
         border: none;
         margin: 0 0.875rem;
+        @media(max-width: 365px) {
+          margin: 0.5rem 0.275rem;
+        }
       }
       border: 1px solid #E6ECF6;
       border-radius: 5px;
