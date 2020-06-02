@@ -54,6 +54,11 @@ export const AppStyles = styled.div`
       justify-content: center;
       margin: 1rem 0;
     }
+    
+    &__icon{
+      height: auto;
+      width: 100%;
+    }
 
     &__break,
     &__session {
